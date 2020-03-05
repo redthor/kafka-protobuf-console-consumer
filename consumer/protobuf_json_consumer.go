@@ -23,7 +23,7 @@ func (SimpleConsumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error {
 func (h SimpleConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
 		if messageInfo {
-			fmt.Printf("Message topic:%q partition:%d offset:%d\n", msg.Topic, msg.Partition, msg.Offset)
+			fmt.Printf("Message key:%q topic:%q partition:%d offset:%d\n", msg.Key, msg.Topic, msg.Partition, msg.Offset)
 		}
 		jsonString, e := h.protobufJSONStringify.JsonString(msg.Value, h.prettyJson)
 		if e != nil {

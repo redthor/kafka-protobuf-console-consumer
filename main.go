@@ -24,7 +24,7 @@ var (
 
 	fromBeginning 			 = kingpin.Flag("from-beginning", "Read from beginning").Bool()
 	prettyJson    			 = kingpin.Flag("pretty", "Format output").Bool()
-	messageInfo    			 = kingpin.Flag("message-info", "Print topic, partition, offset").Bool()
+	messageInfo    			 = kingpin.Flag("message-info", "Print key, topic, partition, offset").Bool()
 	withSeparator 			 = kingpin.Flag("with-separator", "Adds separator between messages. Useful with --pretty").Bool()
 
 	// make will provide the version details for the release executable
