@@ -1,4 +1,4 @@
-module github.com/yogeshsr/kafka-protobuf-console-consumer
+module github.com/DNAlchemist/kafka-protobuf-console-consumer
 
 require (
 	github.com/DataDog/zstd v1.4.0
