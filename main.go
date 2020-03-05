@@ -48,7 +48,9 @@ func main() {
 	}
 	// Start a new consumer group
 	consumerGroup := consumerGroup()
-	fmt.Printf("Starting %s build-on %s with consumer group: %s\n\n", versionInfo, versionDate, consumerGroup)
+	if *messageInfo {
+		fmt.Printf("Starting %s build-on %s with consumer group: %s\n\n", versionInfo, versionDate, consumerGroup)
+	}
 
 	// Init config, specify appropriate version
 	config := NewConfig()
