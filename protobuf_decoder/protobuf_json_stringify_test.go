@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
-	"github.com/yogeshsr/kafka-protobuf-console-consumer/proto"
+	"github.com/DNAlchemist/kafka-protobuf-console-consumer/proto"
 	"testing"
 )
 

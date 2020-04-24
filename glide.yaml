@@ -1,4 +1,4 @@
-package: github.com/yogeshsr/kafka-protobuf-console-consumer
+package: github.com/DNAlchemist/kafka-protobuf-console-consumer
 import:
 - package: github.com/Shopify/sarama
   version: ^1.22.1

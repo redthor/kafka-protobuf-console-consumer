@@ -11,7 +11,7 @@ For other than OS X, please clone the repo and follow Build from source section
 
 To install on OS X
 ```
-brew tap yogeshsr/homebrew-tap
+brew tap DNAlchemist/homebrew-tap
 brew install kafka-protobuf-console-consumer
 ```  
 To upgrade
@@ -48,7 +48,7 @@ Flags:
 ## Build from source
 ``` sh
 $ cd $GOPATH/src
-$ git clone https://github.com/yogeshsr/kafka-protobuf-console-consumer.git
+$ git clone https://github.com/DNAlchemist/kafka-protobuf-console-consumer.git
 $ glide install
 $ GO111MODULE=on go build -o ./kafka-protobuf-console-consumer main.go
 ```

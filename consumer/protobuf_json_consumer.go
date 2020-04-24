@@ -3,7 +3,8 @@ package consumer
 import (
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/yogeshsr/kafka-protobuf-console-consumer/protobuf_decoder"
+	"github.com/DNAlchemist/kafka-protobuf-console-consumer/protobuf_decoder"
+	"strings"
 )
 
 type SimpleConsumerGroupHandler struct {
