@@ -24,6 +24,7 @@ var (
 
 	fromBeginning 			 = kingpin.Flag("from-beginning", "Read from beginning").Bool()
 	prettyJson    			 = kingpin.Flag("pretty", "Format output").Bool()
+	messageInfo    			 = kingpin.Flag("message-info", "Print key, topic, partition, offset").Bool()
 	withSeparator 			 = kingpin.Flag("with-separator", "Adds separator between messages. Useful with --pretty").Bool()
 
 	// make will provide the version details for the release executable
@@ -47,7 +48,9 @@ func main() {
 	}
 	// Start a new consumer group
 	consumerGroup := consumerGroup()
-	fmt.Printf("Starting %s build-on %s with consumer group: %s\n\n", versionInfo, versionDate, consumerGroup)
+	if *messageInfo {
+		fmt.Printf("Starting %s build-on %s with consumer group: %s\n\n", versionInfo, versionDate, consumerGroup)
+	}
 
 	// Init config, specify appropriate version
 	config := NewConfig()
@@ -88,7 +91,7 @@ func main() {
 		}
 
 		handler := consumer.NewSimpleConsumerGroupHandler(
-			protobufJSONStringify, *prettyJson, *fromBeginning, *withSeparator, )
+			protobufJSONStringify, *prettyJson, *fromBeginning, *withSeparator, *messageInfo, )
 
 		err = group.Consume(ctx, topics, handler)
 		if err != nil {

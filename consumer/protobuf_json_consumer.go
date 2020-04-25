@@ -12,19 +12,23 @@ type SimpleConsumerGroupHandler struct {
 	prettyJson            bool
 	fromBeginning         bool
 	withSeparator         bool
+	messageInfo           bool
 }
 
-func NewSimpleConsumerGroupHandler(protobufJSONStringify *protobuf_decoder.ProtobufJSONStringify, prettyJson bool, fromBeginning bool, withSeparator bool) *SimpleConsumerGroupHandler {
-	return &SimpleConsumerGroupHandler{protobufJSONStringify: protobufJSONStringify, prettyJson: prettyJson, fromBeginning: fromBeginning, withSeparator: withSeparator}
+func NewSimpleConsumerGroupHandler(protobufJSONStringify *protobuf_decoder.ProtobufJSONStringify, prettyJson bool, fromBeginning bool, withSeparator bool, messageInfo bool) *SimpleConsumerGroupHandler {
+	return &SimpleConsumerGroupHandler{protobufJSONStringify: protobufJSONStringify, prettyJson: prettyJson, fromBeginning: fromBeginning, withSeparator: withSeparator, messageInfo: messageInfo}
 }
 
 func (SimpleConsumerGroupHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
 func (SimpleConsumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
 func (h SimpleConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
+
 		var message strings.Builder
 
-		message.WriteString("Message topic:%q partition:%d offset:%d\n", msg.Topic, msg.Partition, msg.Offset)
+		if h.messageInfo {
+			message.WriteString("Message key:%q topic:%q partition:%d offset:%d\n", msg.Key, msg.Topic, msg.Partition, msg.Offset)
+		}
 		jsonString, e := h.protobufJSONStringify.JsonString(msg.Value, h.prettyJson)
 		if e != nil {
 			fmt.Println(e)
