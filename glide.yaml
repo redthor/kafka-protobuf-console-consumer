@@ -5,3 +5,4 @@ import:
 - package: gopkg.in/alecthomas/kingpin.v2
   version: ^2.2.4
 - package: github.com/jhump/protoreflect
+  version: ^1.6.0
