@@ -21,6 +21,7 @@ var (
 	protoImportDirs          = kingpin.Flag("proto-dir", "/foo/dir1 /bar/dir2 (add all dirs used by imports)").Strings()
 	protoFileNameWithMessage = kingpin.Flag("file", "will be baz/a.proto that's in /foo/dir1/baz/a.proto").String()
 	messageName              = kingpin.Flag("message", "Proto message name").String()
+	headers                  = kingpin.Flag("headers", "Print headers").Bool()
 
 	fromBeginning 			 = kingpin.Flag("from-beginning", "Read from beginning").Bool()
 	prettyJson    			 = kingpin.Flag("pretty", "Format output").Bool()
@@ -91,7 +92,7 @@ func main() {
 		}
 
 		handler := consumer.NewSimpleConsumerGroupHandler(
-			protobufJSONStringify, *prettyJson, *fromBeginning, *withSeparator, *messageInfo, )
+			protobufJSONStringify, *prettyJson, *fromBeginning, *withSeparator, *messageInfo, *headers)
 
 		err = group.Consume(ctx, topics, handler)
 		if err != nil {
