@@ -27,12 +27,16 @@ func (h SimpleConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSessio
 
 		var message strings.Builder
 
+		if h.headers || h.messageInfo {
+			message.WriteString("{")
+		}
+
 		if h.messageInfo {
-			message.WriteString(fmt.Sprintf("Message key:%q topic:%q partition:%d offset:%d\n", msg.Key, msg.Topic, msg.Partition, msg.Offset))
+			message.WriteString(fmt.Sprintf("\"info\":{\"timestamp\":\"%s\",\"key\":%q,\"topic\":%q,\"partition\":%d,\"offset\":%d},", msg.Timestamp, msg.Key, msg.Topic, msg.Partition, msg.Offset))
 		}
 
 		if h.headers {
-			message.WriteString("{\"headers\":{")
+			message.WriteString("\"headers\":{")
 			var first = true
 			for _, h := range msg.Headers {
 				if first {
@@ -50,11 +54,11 @@ func (h SimpleConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSessio
 			fmt.Println(e)
 		}
 
-		if h.headers {
+		if h.headers || h.messageInfo {
 			message.WriteString("\"message\":")
 		}
 		message.WriteString(jsonString)
-		if h.headers {
+		if h.headers || h.messageInfo {
 			message.WriteString("}")
 		}
 

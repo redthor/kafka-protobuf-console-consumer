@@ -55,7 +55,7 @@ func main() {
 
 	// Init config, specify appropriate version
 	config := NewConfig()
-	config.Version = V0_10_2_0
+	config.Version = V2_2_0_0
 	config.Consumer.Return.Errors = true
 	config.Consumer.Offsets.Initial = offset()
 	if *debug {
