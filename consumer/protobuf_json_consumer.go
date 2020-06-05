@@ -32,7 +32,7 @@ func (h SimpleConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSessio
 		}
 
 		if h.messageInfo {
-			message.WriteString(fmt.Sprintf("\"info\":{\"timestamp\":\"%s\",\"key\":%q,\"topic\":%q,\"partition\":%d,\"offset\":%d},", msg.Timestamp, msg.Key, msg.Topic, msg.Partition, msg.Offset))
+			message.WriteString(fmt.Sprintf("\"info\":{\"offset\":%d,\"timestamp\":\"%s\",\"key\":%q,\"topic\":%q,\"partition\":%d},", msg.Offset, msg.Timestamp, msg.Key, msg.Topic, msg.Partition))
 		}
 
 		if h.headers {
