@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	. "github.com/Shopify/sarama"
-	"github.com/DNAlchemist/kafka-protobuf-console-consumer/consumer"
-	"github.com/DNAlchemist/kafka-protobuf-console-consumer/protobuf_decoder"
-	"gopkg.in/alecthomas/kingpin.v2"
 	"log"
 	"os"
 	"time"
+
+	"github.com/DNAlchemist/kafka-protobuf-console-consumer/consumer"
+	"github.com/DNAlchemist/kafka-protobuf-console-consumer/protobuf_decoder"
+	. "github.com/Shopify/sarama"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
@@ -58,6 +59,7 @@ func main() {
 	config.Version = V2_2_0_0
 	config.Consumer.Return.Errors = true
 	config.Consumer.Offsets.Initial = offset()
+	config.Net.TLS.Enable = true
 	if *debug {
 		Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
 	}
